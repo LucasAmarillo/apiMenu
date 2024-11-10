@@ -1,0 +1,42 @@
+def save(self):
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute(
+            "INSERT INTO posts (autor, contenido, fecha_creacion) VALUES (%s, %s, %s) RETURNING id",
+            (self.autor, self.contenido, self.fecha_creacion)
+        )
+        post_id = cursor.fetchone()[0]
+        db.commit()
+        cursor.close()
+        return post_id
+
+
+Paso 1: db = get_db()
+
+    Llama a la función get_db() para obtener la conexión a la base de datos. Esta conexión permite ejecutar consultas SQL sobre la base de datos de forma persistente mientras esté abierta.
+
+Paso 2: cursor = db.cursor()
+
+    Crea un cursor a partir de la conexión db. El cursor es un objeto que permite ejecutar comandos SQL y manipular los resultados de las consultas.
+
+Paso 3: cursor.execute(...)
+
+    Ejecuta la consulta SQL INSERT INTO posts .... Aquí se insertan tres valores (autor, contenido, fecha_creacion) en la tabla posts.
+    La parte RETURNING id permite obtener el valor del campo id de la fila recién insertada sin tener que ejecutar una segunda consulta para recuperarlo.
+
+Paso 4: post_id = cursor.fetchone()[0]
+
+    Llama a cursor.fetchone() para recuperar el resultado de la consulta. Este método devuelve una fila como una tupla (en este caso, solo contiene el id del nuevo registro).
+    cursor.fetchone()[0] toma el primer (y único) valor de esta tupla, asignándolo a post_id, que contiene el id del registro insertado.
+
+Paso 5: db.commit()
+
+    Confirma los cambios en la base de datos. Esto guarda la operación INSERT de forma permanente.
+
+Paso 6: cursor.close()
+
+    Cierra el cursor, liberando los recursos que utilizaba.
+
+Paso 7: return post_id
+
+    Devuelve el id del nuevo registro para que pueda ser utilizado en otro lugar del código.
