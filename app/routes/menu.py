@@ -8,7 +8,7 @@ bp = Blueprint('menu', __name__, url_prefix='/api')
 def obtener_menu():
     try:
         menu = Menu.obtener_menu()
-        menu_json = [{"nombre": item[1], "precio": item[2], "ingredientes": item[3],"Tipo": item[5]} for item in menu]
+        menu_json = [{"nombre": item["nombre"], "precio": item["precio"], "ingredientes": item["ingredientes"], "Tipo": item["tipo"]} for item in menu]
         return jsonify(menu_json), 200
     except Exception as e:
         return jsonify({"error": f"No se pudo obtener el menu: {str(e)}"}), 500

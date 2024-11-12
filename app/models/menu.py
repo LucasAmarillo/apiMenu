@@ -12,9 +12,9 @@ class Menu:
     def obtener_menu():
         db = get_db()
         cursor = db.cursor()
-        cursor.execute("SELECT c.id_plato, c.nombre, c.precio, c.ingredientes, c.id_tipoplato, tc.descripcion FROM comidas c INNER JOIN tipo_comidas tc ON tc.id_plato = c.id_tipoplato")
+        cursor.execute("SELECT c.id_plato, c.nombre, c.precio, c.ingredientes, c.id_tipoplato, tc.descripcion AS Tipo FROM comidas c INNER JOIN tipo_comidas tc ON tc.id_plato = c.id_tipoplato")
         menu = cursor.fetchall()
-        # print(menu)
+        
         # Cerrar el cursor
         cursor.close()
 
@@ -25,11 +25,12 @@ class Menu:
                 'nombre': item[1],
                 'precio': item[2],
                 'ingredientes': item[3],
-                'id_tipoPlato': item[4]
+                'id_tipoPlato': item[4],
+                'tipo': item[5]
             }
             menu_items.append(menu_item)
         
-        return jsonify(menu_items)
+        return menu_items
 
         # # Devolver los resultados como JSON
         # return jsonify(menu_items)
