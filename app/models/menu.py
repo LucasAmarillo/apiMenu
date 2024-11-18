@@ -12,7 +12,8 @@ class Menu:
     def obtener_menu():
         db = get_db()
         cursor = db.cursor()
-        cursor.execute("SELECT c.id_plato, c.nombre, c.precio, c.ingredientes, c.id_tipoplato, tc.descripcion AS Tipo FROM comidas c INNER JOIN tipo_comidas tc ON tc.id_plato = c.id_tipoplato")
+        cursor.execute("select c.*, tp.descripcion as tipo from comidas c inner join tipo_plato tp on tp.id_tipo = c.id_tipoplato ")
+        # cursor.execute("SELECT c.id_plato, c.nombre, c.precio, c.ingredientes, c.id_tipoplato, tc.descripcion AS Tipo FROM comidas c INNER JOIN tipo_plato tc ON tc.id_plato = c.id_tipoplato")
         menu = cursor.fetchall()
         
         # Cerrar el cursor
