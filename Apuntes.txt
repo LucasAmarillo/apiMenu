@@ -40,3 +40,29 @@ Paso 6: cursor.close()
 Paso 7: return post_id
 
     Devuelve el id del nuevo registro para que pueda ser utilizado en otro lugar del código.
+
+
+
+app.py
+    importamos de app crear_app que esta en el archivo __init__
+    crear_app es una funcion que crea una aplicacion Flask __name__ quiere decir que es el modulo actual esto ayuda a flask para encontrar los archivos y recursos, y configura las rutas relativas.
+    en app.config from_object estan las configuraciones de la base de datos
+    app.register_blueprint en flask es una forma de organizar el codigo de manera modular
+    menu.bp tiene las rutas y logicqa para las funcionalidades, cuadno registramos el blueprint se agregan esas rutas a la app principal
+    blueprint es para organizar y estructurar una aplicacion con varios modulos. lo que hace es dividir la aplicacion en partes logicas para que sea mas facil de mantener y escalar.
+
+    return app, se retorna la app
+    os es para las carpetas del sistema operativo
+
+
+en utils.db
+tenemos la funciones para acceder a la base de datos, en este caso la conectamos con postgresql
+tambien esta la funcion para cerrar la base de datos
+init_app cierra la conexion cuadno ya no se necesita acceso a la mismqa
+
+
+Routes/menu.py
+Las routes vienen a ser como los controladores en mvc actuando de manera similar
+
+bp = Blueprint('menu', __name__, url_prefix='/api')
+recibe la solicitud, 

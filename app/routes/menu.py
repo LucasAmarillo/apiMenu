@@ -29,7 +29,7 @@ def insertar_comida():
     except Exception as e:
         return jsonify({"error": f"No se pudo insertar la comida: {str(e)}"}), 500
 
-@bp.route('/actualizar_comida', methods=['POST'])
+@bp.route('/actualizar_comida', methods=['PUT'])
 def actualizar_comida():
     try:
         id_plato = request.json['id_plato']
